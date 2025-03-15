@@ -1,0 +1,4 @@
+FROM node:23-bullseye
+
+# tsx と npm をグローバルインストール
+RUN npm install -g tsx npm@11.2.0 --no-cache
