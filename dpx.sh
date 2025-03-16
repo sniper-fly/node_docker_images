@@ -66,6 +66,6 @@ dpx() {
       -v "$PWD":/app -w /app \
       $port_option $port_mapping \
       -v npx-cache-node23:/home/node/.npm \
-      zafu/node23-tsx:1.1 npx "$@"
+      zafu/node23-tsx:1.2 npx "$@"
   fi
 }

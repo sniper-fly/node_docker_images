@@ -4,8 +4,7 @@ FROM node:23-bullseye
 RUN apt-get update && apt-get install -y --no-install-recommends \
   gosu
 
-ARG USER=node
-ENV USER=$USER
+ENV USER=node
 ENV NPM_CONFIG_CACHE=/home/$USER/.npm
 ENV NPM_CONFIG_PREFIX=/home/$USER/.npm-global
 COPY entry-point.sh /
