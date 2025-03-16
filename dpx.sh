@@ -1,6 +1,15 @@
 #!/bin/bash
 
 dpx() {
+  local port_mapping=""
+  local port_option=""
+  # ポート指定オプションの処理
+  if [[ "$1" == "-p" && -n "$2" ]]; then
+    port_option="-p"
+    port_mapping="$2:$2"
+    shift 2
+  fi
+
   # 開始ディレクトリ（カレントディレクトリ）
   local DIR=$(pwd)
 
@@ -47,8 +56,16 @@ dpx() {
 
   # バージョンに応じた処理
   if [[ "$NODE_VERSION" =~ ^18\. ]]; then
-    docker run --rm -v "$PWD":/app -w /app --user $(id -u):$(id -g) -it node:18-bullseye npx "$@"
+    docker run --rm -it \
+      -v "$PWD":/app -w /app \
+      --user $(id -u):$(id -g) \
+      $port_option $port_mapping \
+      node:18-bullseye npx "$@"
   else
-    docker run --rm -v "$PWD":/app -w /app --user $(id -u):$(id -g) -it zafu/node23-tsx:1.0 npx "$@"
+    docker run --rm -it \
+      -v "$PWD":/app -w /app \
+      $port_option $port_mapping \
+      -v npx-cache-node23:/home/node/.npm \
+      zafu/node23-tsx:1.1 npx "$@"
   fi
 }
