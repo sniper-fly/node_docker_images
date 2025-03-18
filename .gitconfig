@@ -1,0 +1,9 @@
+[color]
+ui = auto
+[user]
+name = sniper-fly
+email = 50983271+sniper-fly@users.noreply.github.com
+[init]
+defaultBranch = main
+[credential]
+helper = store

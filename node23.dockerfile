@@ -8,6 +8,7 @@ ENV USER=node
 ENV NPM_CONFIG_CACHE=/home/$USER/.npm
 ENV NPM_CONFIG_PREFIX=/home/$USER/.npm-global
 COPY entry-point.sh /
+COPY .gitconfig /home/$USER/.gitconfig
 
 RUN gosu $USER npm install -g npm@11.2.0 tsx --no-cache
 ENV PATH=$NPM_CONFIG_PREFIX/bin:$PATH
